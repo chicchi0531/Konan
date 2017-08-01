@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Assets\Konan\BodyTransform.cs" />
     <Compile Include="Assets\Konan\FaceTransform.cs" />
+    <Compile Include="Assets\Konan\FreeTransform.cs" />
     <Compile Include="Assets\Konan\WireFrame.cs" />
     <Compile Include="Assets\UnityChan\Scripts\AutoBlink.cs" />
     <Compile Include="Assets\UnityChan\Scripts\CameraController.cs" />
