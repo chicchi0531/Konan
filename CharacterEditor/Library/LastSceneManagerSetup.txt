@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/UnityChan/Scenes/Locomotion.unity
+- path: Assets/SkinnedMeshCombiner-master/UnityProject/Assets/avatarTest001.unity
   isLoaded: 1
   isActive: 1
