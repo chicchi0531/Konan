@@ -7,10 +7,15 @@ public class AvatarTest : MonoBehaviour {
 	
     private const int partsNum = (int)SkinnedMeshCombiner.MAIN_PARTS.MAX;
 
+    [SerializeField]
+    private GameObject mRoot = null;
+
     [SerializeField] private string rootBoneFileName = null;
     [SerializeField] private string[] headFileNames = null;
     [SerializeField] private string[] bodyFileNames = null;
     [SerializeField] private string[] legFileNames = null;
+
+
 
     [SerializeField]
     private Dropdown[] dropDowns = new Dropdown[partsNum];
@@ -90,11 +95,11 @@ public class AvatarTest : MonoBehaviour {
 
         // ルートボーン用のファイルを読み込む
 		Debug.Log ("rootBoneFileName " + rootBoneFileName);
-		ResourceRequest bornReq = Resources.LoadAsync<GameObject>(rootBoneFileName);
+		ResourceRequest bornReq = Resources.LoadAsync<GameObject>("Prefabs/" + rootBoneFileName);
 
         // 各パーツのファイルを読み込む
         for ( int i = 0; i < partsNum; i++) {
-			resourceReqs[i] = Resources.LoadAsync<Object>(selectedFileNames[i]);
+			resourceReqs[i] = Resources.LoadAsync<Object>("Prefabs/" + selectedFileNames[i]);
         }
 
 		// ロード待ち
@@ -115,10 +120,11 @@ public class AvatarTest : MonoBehaviour {
         }
 
         // Resourcesから必要なファイルを読み込み終わったら、空のGameObjectを生成
-        GameObject root = new GameObject();
+        var root = new GameObject();
         root.transform.position = Vector3.zero;
         root.transform.localScale = Vector3.one;
-		root.name = "Avatar";
+        root.transform.SetParent(mRoot.transform,false);
+        root.name = "Avatar";
 
         // 生成した空のGameObjectにSkinnedMeshCombinerを追加する（以下、Root)
         SkinnedMeshCombiner smc = root.AddComponent<SkinnedMeshCombiner>();

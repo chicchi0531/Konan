@@ -40,6 +40,13 @@ public class SkinnedMeshCombiner : MonoBehaviour {
 			this.rootBoneList.Add(rootBoneTransforms[i].name, boneOffset++);
 		}
 
+        //そたいのぼーんの一覧を表示
+        foreach(var render in smRenderers)
+        {
+            foreach (var list in render.bones)
+                Debug.Log("bone:" + render.name + " : " + list.name);
+        }
+
         // Parts Mesh Add
         for( int p = 0; p < (int)MAIN_PARTS.MAX; p++ ) {
 			
@@ -51,8 +58,19 @@ public class SkinnedMeshCombiner : MonoBehaviour {
 			Dictionary<int,int> boneIndexRplaceDic = new Dictionary<int, int>(4);
 			
 			SkinnedMeshRenderer[] smRenderersParts = parts.GetComponentsInChildren<SkinnedMeshRenderer>();
-            
-			for( int s = 0; s < smRenderersParts.Length; s++ ) {
+
+            //事前探索で、パーツの全ボーン情報を取り出しておく
+            Dictionary<string, int> partsAllBonesList = new Dictionary<string, int>();
+            int count = 0;
+            foreach (var sm in smRenderersParts)
+            {
+                var partsBones = sm.bones;
+                foreach (var b in partsBones)
+                    if(!partsAllBonesList.ContainsKey(b.name))
+                        partsAllBonesList.Add(b.name, count++);
+            }
+
+            for ( int s = 0; s < smRenderersParts.Length; s++ ) {
 				SkinnedMeshRenderer smr = smRenderersParts[s];
 				materials.AddRange(smr.materials);
 				
@@ -62,12 +80,25 @@ public class SkinnedMeshCombiner : MonoBehaviour {
 
 				boneIndexRplaceDic.Clear();
 				int duplicationMeshNo = -1;
-				for( int i = 0; i < meshBones.Length; i++ ) {
-					// 素体のボーンと重複するボーンを調べる
-					if(this.rootBoneList.ContainsKey(meshBones[i].name) ) {
-						boneIndexRplaceDic.Add(i, this.rootBoneList[meshBones[i].name]);
-					}
-				}
+                for (int i = 0; i < meshBones.Length; i++)
+                {
+                    // 素体のボーンと重複するボーンを調べる
+                    if (this.rootBoneList.ContainsKey(meshBones[i].name))
+                    {
+                        boneIndexRplaceDic.Add(i, this.rootBoneList[meshBones[i].name]);
+                    }
+                    else
+                    {
+                        if (rootBoneList.ContainsKey(meshBones[i].parent.name))
+                            meshBones[i].SetParent(bones[rootBoneList[meshBones[i].parent.name]]);
+                        else if (!partsAllBonesList.ContainsKey(meshBones[i].parent.name))
+                            meshBones[i].SetParent(bones[0]);
+
+                        bones.Add(meshBones[i]);
+                        rootBoneList.Add(meshBones[i].name, bones.Count - 1);
+                        boneIndexRplaceDic.Add(i, bones.Count - 1);
+                    }
+                }
 
 				// 部位側のインデックスを素体側のボーンインデックスに置き換える
 				foreach( BoneWeight bw in meshBoneweight ) {
@@ -87,8 +118,6 @@ public class SkinnedMeshCombiner : MonoBehaviour {
                 ci.transform = smr.transform.localToWorldMatrix;
 				combineInstances.Add( ci );
 
-				// 部位のSkinnedMeshRendererオブジェクトは削除する
-				Object.Destroy( smr.gameObject );
 			}
 		}
 		

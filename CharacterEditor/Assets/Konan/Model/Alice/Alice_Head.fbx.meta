@@ -1,0 +1,215 @@
+fileFormatVersion: 2
+guid: cb9529ddeef575c46b80790381c41735
+timeCreated: 1509559938
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: eye1
+    100004: eye_hilight1
+    100006: eye_matsuge
+    100008: eye_white1
+    100010: hair2
+    100012: hair3
+    100014: hair_gom1
+    100016: hair_momi
+    100018: head1
+    100020: hoho1
+    100022: imagePlane1
+    100024: imagePlane2
+    100026: mayu1
+    100028: polySurface1
+    100030: polySurface2
+    100032: polySurface3
+    100034: mesh_cheak
+    100036: mesh_eye
+    100038: mesh_eye_hilight
+    100040: mesh_eye_mayu
+    100042: mesh_eye_white
+    100044: mesh_hair_back
+    100046: mesh_hair_front
+    100048: mesh_hair_gom
+    100050: mesh_hair_momiage
+    100052: mesh_hair_twintale
+    100054: mesh_head
+    100056: mesh_mayu
+    100058: mesh_skin
+    100060: mesh_body
+    400000: //RootNode
+    400002: eye1
+    400004: eye_hilight1
+    400006: eye_matsuge
+    400008: eye_white1
+    400010: hair2
+    400012: hair3
+    400014: hair_gom1
+    400016: hair_momi
+    400018: head1
+    400020: hoho1
+    400022: imagePlane1
+    400024: imagePlane2
+    400026: mayu1
+    400028: polySurface1
+    400030: polySurface2
+    400032: polySurface3
+    400034: mesh_cheak
+    400036: mesh_eye
+    400038: mesh_eye_hilight
+    400040: mesh_eye_mayu
+    400042: mesh_eye_white
+    400044: mesh_hair_back
+    400046: mesh_hair_front
+    400048: mesh_hair_gom
+    400050: mesh_hair_momiage
+    400052: mesh_hair_twintale
+    400054: mesh_head
+    400056: mesh_mayu
+    400058: mesh_skin
+    400060: mesh_body
+    2300000: eye1
+    2300002: eye_hilight1
+    2300004: eye_matsuge
+    2300006: eye_white1
+    2300008: hair2
+    2300010: hair3
+    2300012: hair_gom1
+    2300014: hair_momi
+    2300016: hoho1
+    2300018: mayu1
+    2300020: polySurface2
+    2300022: polySurface3
+    2300024: mesh_cheak
+    2300026: mesh_eye
+    2300028: mesh_eye_hilight
+    2300030: mesh_eye_mayu
+    2300032: mesh_eye_white
+    2300034: mesh_hair_back
+    2300036: mesh_hair_front
+    2300038: mesh_hair_gom
+    2300040: mesh_hair_momiage
+    2300042: mesh_hair_twintale
+    2300044: mesh_mayu
+    2300046: mesh_skin
+    2300048: mesh_body
+    3300000: eye1
+    3300002: eye_hilight1
+    3300004: eye_matsuge
+    3300006: eye_white1
+    3300008: hair2
+    3300010: hair3
+    3300012: hair_gom1
+    3300014: hair_momi
+    3300016: hoho1
+    3300018: mayu1
+    3300020: polySurface2
+    3300022: polySurface3
+    3300024: mesh_cheak
+    3300026: mesh_eye
+    3300028: mesh_eye_hilight
+    3300030: mesh_eye_mayu
+    3300032: mesh_eye_white
+    3300034: mesh_hair_back
+    3300036: mesh_hair_front
+    3300038: mesh_hair_gom
+    3300040: mesh_hair_momiage
+    3300042: mesh_hair_twintale
+    3300044: mesh_mayu
+    3300046: mesh_skin
+    3300048: mesh_body
+    4300000: polySurface2
+    4300002: eye_white1
+    4300004: eye1
+    4300006: eye_hilight1
+    4300008: eye_matsuge
+    4300010: mayu1
+    4300012: hair2
+    4300014: polySurface3
+    4300016: hair_momi
+    4300018: hair3
+    4300020: hair_gom1
+    4300022: hoho1
+    4300024: mesh_eye_white
+    4300026: mesh_eye
+    4300028: mesh_eye_hilight
+    4300030: mesh_eye_mayu
+    4300032: mesh_mayu
+    4300034: mesh_hair_front
+    4300036: mesh_hair_back
+    4300038: mesh_hair_momiage
+    4300040: mesh_hair_twintale
+    4300042: mesh_hair_gom
+    4300044: mesh_cheak
+    4300046: mesh_skin
+    4300048: mesh_body
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
