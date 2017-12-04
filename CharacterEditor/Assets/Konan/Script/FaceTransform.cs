@@ -12,7 +12,7 @@ namespace Konan
         public int Index { get; set; }
         public Vector3 Vertex { get; set; }
     }
-    
+
     public class FaceTransform : MonoBehaviour
     {
 
@@ -28,6 +28,10 @@ namespace Konan
         [SerializeField]
         private int mFaceMeshIndex = 0;
 
+        //顔自体のメッシュ
+        [SerializeField]
+        private GameObject mFaceMesh = null;
+
         private SkinnedMeshRenderer[] mDMRenderer = null;
         private MeshFilter[] mSMFilter = null;
 
@@ -42,7 +46,11 @@ namespace Konan
         void Start()
         {
             mDMRenderer = GetComponentsInChildren<SkinnedMeshRenderer>();
+            if (mDMRenderer == null) mDMRenderer = new SkinnedMeshRenderer[0];
+
             mSMFilter = GetComponentsInChildren<MeshFilter>();
+            if (mSMFilter == null) mSMFilter = new MeshFilter[0];
+
             mDefaultVertices = new Point[mDMRenderer.Length + mSMFilter.Length][];
             mMesh = new Mesh[mDMRenderer.Length + mSMFilter.Length];
 
@@ -78,9 +86,20 @@ namespace Konan
                 mDefaultVertices[i] = trianglesUnique.Select(x => new Point { Index = x, Vertex = mMesh[i].vertices[x] }).ToArray();
             }
 
+            //最小値と最大値を検出するようメッシュ
+            var dmRenderer = mFaceMesh.GetComponent<SkinnedMeshRenderer>();
+            var smFilter = mFaceMesh.GetComponent<MeshFilter>();
+
+            Mesh mesh = (dmRenderer) ? Instantiate(dmRenderer.sharedMesh) : Instantiate(smFilter.sharedMesh);
+            var t = mesh.GetTriangles(0);
+            var unique_t = t.Distinct().ToArray();
+
+            var vertices = unique_t.Select(x => new Point { Index = x, Vertex = mesh.vertices[x] }).ToArray();
+
+
             //頂点のY軸方向の最小値と最大値を保存
-            mMinPosY = mDefaultVertices.Select(x => x.Select(y => y.Vertex.y).Aggregate((n, next) => Mathf.Min(n, next))).Aggregate((m, next) => Mathf.Min(m, next));
-            mMaxPosY = mDefaultVertices.Select(x => x.Select(y => y.Vertex.y).Aggregate((n, next) => Mathf.Max(n, next))).Aggregate((m, next) => Mathf.Max(m, next));
+            mMinPosY = vertices.Select(y => y.Vertex.y).Aggregate((n, next) => Mathf.Min(n, next));
+            mMaxPosY = vertices.Select(y => y.Vertex.y).Aggregate((n, next) => Mathf.Max(n, next));
 
 
         }
@@ -95,9 +114,9 @@ namespace Konan
         {
             //スライダーの値を取得
             var n = mCurve.Evaluate(mSlider.value)+1.0f;
+            var filterNum = mDMRenderer.Length + mSMFilter.Length;
 
-
-            for (int i = 0; i < mDMRenderer.Length + mSMFilter.Length; i++)
+            for (int i = 0; i < filterNum; i++)
             {
                 //現在の頂点
                 var vertices = mMesh[i].vertices;
@@ -119,7 +138,9 @@ namespace Konan
                     }
 
                     //b=a^nに従って座標を変換
-                    mappedY = Mathf.Pow(mappedY, n);
+                    if (mappedY >= 0.0f)
+                        mappedY = Mathf.Pow(mappedY, n);
+
 
                     //元の座標空間に戻す
                     y = mappedY * (mMaxPosY - mMinPosY) + mMinPosY;

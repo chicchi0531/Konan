@@ -134,9 +134,12 @@ namespace Konan
                 (1.0f - bottomRate) * mLegThicknessRate + bottomRate);
 
             //変形後に自由変形ノードを変形させる
-            foreach (var f in mFreeTransforms)
+            if (mFreeTransforms != null)
             {
-                f.OnChange(heightRate);
+                foreach (var f in mFreeTransforms)
+                {
+                    f.OnChange(heightRate);
+                }
             }
         }
     }

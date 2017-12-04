@@ -10,10 +10,14 @@ public class AvatarTest : MonoBehaviour {
     [SerializeField]
     private GameObject mRoot = null;
 
+    [SerializeField]
+    private string rootDirectoryName = "";
+
     [SerializeField] private string rootBoneFileName = null;
-    [SerializeField] private string[] headFileNames = null;
-    [SerializeField] private string[] bodyFileNames = null;
-    [SerializeField] private string[] legFileNames = null;
+    [SerializeField] private string[] upperbodyFileNames = null;
+    [SerializeField] private string[] bottombodyFileNames = null;
+    [SerializeField] private string[] handFileNames = null;
+    [SerializeField] private string[] footFileNames = null;
 
 
 
@@ -36,31 +40,42 @@ public class AvatarTest : MonoBehaviour {
     // =====================================================
     // UI Interface
     // =====================================================
-    public void SelectHeadFile(int index) {
-		int idx = (int)SkinnedMeshCombiner.MAIN_PARTS.HEAD;
+    public void SelectUpperBodyFile(int index) {
+		int idx = (int)SkinnedMeshCombiner.MAIN_PARTS.UPPER;
 		int value = dropDowns [idx].value;
-		if (headFileNames.Length >= value) {
-			selectedFileNames[idx] = headFileNames[value];
-			Debug.Log("SelectHeadFile " + selectedFileNames[idx]);
+		if (upperbodyFileNames.Length >= value) {
+			selectedFileNames[idx] = upperbodyFileNames[value];
+			Debug.Log("SelectUpperBodyFile " + selectedFileNames[idx]);
         }
     }
 
-    public void SelectBodyFile(int index) {
-		int idx = (int)SkinnedMeshCombiner.MAIN_PARTS.BODY;
+    public void SelectBottomBodyFile(int index) {
+		int idx = (int)SkinnedMeshCombiner.MAIN_PARTS.BOTTOM;
 		int value = dropDowns [idx].value;
-		if (bodyFileNames.Length >= dropDowns[idx].value) {
-			selectedFileNames[idx] = bodyFileNames[value];
-			Debug.Log("SelectBodyFile " + selectedFileNames[idx]);
+		if (bottombodyFileNames.Length >= dropDowns[idx].value) {
+			selectedFileNames[idx] = bottombodyFileNames[value];
+			Debug.Log("SelectBottomBodyFile " + selectedFileNames[idx]);
 		}
     }
 
-    public void SelectLegFile(int index) {
-		int idx = (int)SkinnedMeshCombiner.MAIN_PARTS.LEG;
+    public void SelectHandFile(int index) {
+		int idx = (int)SkinnedMeshCombiner.MAIN_PARTS.HAND;
 		int value = dropDowns [idx].value;
-		if (legFileNames.Length >= dropDowns[idx].value) {
-			selectedFileNames[idx] = legFileNames[value];
-			Debug.Log("SelectLegFile " + selectedFileNames[idx]);
+		if (handFileNames.Length >= dropDowns[idx].value) {
+			selectedFileNames[idx] = handFileNames[value];
+			Debug.Log("SelectHandFile " + selectedFileNames[idx]);
 		}
+    }
+
+    public void SelectFootFile(int index)
+    {
+        int idx = (int)SkinnedMeshCombiner.MAIN_PARTS.FOOT;
+        int value = dropDowns[idx].value;
+        if (footFileNames.Length >= dropDowns[idx].value)
+        {
+            selectedFileNames[idx] = footFileNames[value];
+            Debug.Log("SelectFootFile " + selectedFileNames[idx]);
+        }
     }
 
     public void AvatarChange() {
@@ -74,15 +89,16 @@ public class AvatarTest : MonoBehaviour {
 	}
 
 	void Start () {
-		Caching.CleanCache();
+		Caching.ClearCache();
 		Resources.UnloadUnusedAssets ();
         StartCoroutine (InitAvatar());
     }
 
 	IEnumerator InitAvatar() {
-        SelectHeadFile(0);
-        SelectBodyFile(0);
-        SelectLegFile(0);
+        SelectUpperBodyFile(0);
+        SelectBottomBodyFile(0);
+        SelectHandFile(0);
+        SelectFootFile(0);
         yield return StartCoroutine(LoadAvatar());
     }
 
@@ -95,11 +111,11 @@ public class AvatarTest : MonoBehaviour {
 
         // ルートボーン用のファイルを読み込む
 		Debug.Log ("rootBoneFileName " + rootBoneFileName);
-		ResourceRequest bornReq = Resources.LoadAsync<GameObject>("Prefabs/" + rootBoneFileName);
+		ResourceRequest bornReq = Resources.LoadAsync<GameObject>(rootDirectoryName + rootBoneFileName);
 
         // 各パーツのファイルを読み込む
         for ( int i = 0; i < partsNum; i++) {
-			resourceReqs[i] = Resources.LoadAsync<Object>("Prefabs/" + selectedFileNames[i]);
+			resourceReqs[i] = Resources.LoadAsync<Object>(rootDirectoryName + selectedFileNames[i]);
         }
 
 		// ロード待ち

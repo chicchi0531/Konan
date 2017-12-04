@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/SkinnedMeshCombiner-master/UnityProject/Assets/avatarTest001.unity
+- path: Assets/Konan/Scene/CharacterEdit_Demo.unity
   isLoaded: 1
   isActive: 1

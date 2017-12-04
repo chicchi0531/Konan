@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: d517faff295f97f409afd7978a47ba4a
+timeCreated: 1511849160
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: FOT-Seurat Pro
+  fontNames:
+  - FOT-Seurat Pro
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 83fcbfade08c63d46bca3eadb7922cce, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

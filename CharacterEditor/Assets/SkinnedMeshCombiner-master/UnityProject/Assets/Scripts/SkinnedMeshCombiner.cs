@@ -4,9 +4,10 @@ using System.Collections.Generic;
 public class SkinnedMeshCombiner : MonoBehaviour {
 	// 身体の部位
 	public enum MAIN_PARTS {
-		HEAD,
-		BODY,
-		LEG,
+		UPPER,
+		BOTTOM,
+		HAND,
+        FOOT,
 		MAX,
 	};
 

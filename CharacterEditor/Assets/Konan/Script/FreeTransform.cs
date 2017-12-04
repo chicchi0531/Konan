@@ -21,11 +21,11 @@ namespace Konan
         private Axis mLenghAxis = Axis.X;
 
         //ボーンスケールの変化率、太さ
-        [SerializeField, Range(-3.0f, 1.0f)]
+        [SerializeField, Range(-3.0f, 3.0f)]
         float mThickness = 0.0f;
 
         //ボーンスケールの変化率、長さ
-        [SerializeField, Range(-3.0f, 1.0f)]
+        [SerializeField, Range(-3.0f, 3.0f)]
         float mLength = 0.0f;
 
         public void OnChange(float eval)

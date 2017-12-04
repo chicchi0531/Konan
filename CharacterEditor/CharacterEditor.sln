@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharacterEditor.Plugins", "CharacterEditor.Plugins.csproj", "{0E2FE775-03AF-1752-2457-FCB312709376}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharacterEditor", "CharacterEditor.csproj", "{58656851-CA89-F642-4597-09DFD7DDA47E}"
