@@ -18,11 +18,7 @@ namespace Konan
     }
 
     public class BodyTransform : MonoBehaviour {
-
-        //年齢スライダー
-        [SerializeField]
-        private Slider mSlider = null;
-
+        
         //スライダーを使わない場合の値
         [SerializeField, Range(0.0f, 1.0f)]
         private float mOld = 1.0f;
@@ -79,28 +75,33 @@ namespace Konan
 
         //内部変数
         private FreeTransform[] mFreeTransforms = null;
+        private FaceTransform mFaceTransform = null;
 
         // Use this for initialization
-        void Start() {
+        void Awake() {
+
             //自由変形コンポーネントを全取得
             mFreeTransforms = GetComponentsInChildren<FreeTransform>();
 
-            OnChange();
+            //顔変形コンポーネントを取得
+            mFaceTransform = GetComponentInChildren<FaceTransform>();
+            
         }
 
         // Update is called once per frame
-        public void OnChange() {
-
-            var value = (mSlider) ? mSlider.value : mOld;
+        public void OnChange(float rate)
+        {
+            //顔も変形させる
+            mFaceTransform.OnChange(rate);
 
             //身長比
-            var heightRate = mHeightCurve.Evaluate(value) * (1.0f - mMinMaxHeight.Rate()) + mMinMaxHeight.Rate();
+            var heightRate = mHeightCurve.Evaluate(rate) * (1.0f - mMinMaxHeight.Rate()) + mMinMaxHeight.Rate();
             //座高比
-            var sittingRate = mSittingHeightCurve.Evaluate(value) * (1.0f - mMinMaxSittingHeight.Rate()) + mMinMaxSittingHeight.Rate();
+            var sittingRate = mSittingHeightCurve.Evaluate(rate) * (1.0f - mMinMaxSittingHeight.Rate()) + mMinMaxSittingHeight.Rate();
             //下半身比
             var bottomRate = 2 * heightRate - sittingRate;
             //頭身比
-            var headRate = (mHeightCurve.Evaluate(value) * (1.0f - mMinMaxHeadAndBody.Rate()) + mMinMaxHeadAndBody.Rate()) * heightRate;
+            var headRate = (mHeightCurve.Evaluate(rate) * (1.0f - mMinMaxHeadAndBody.Rate()) + mMinMaxHeadAndBody.Rate()) * heightRate;
 
             //値をもとにボーンを更新
             mRightHand.localScale = new Vector3(heightRate, 1.0f, 1.0f);

@@ -20,9 +20,7 @@ namespace Konan.UI
         GameObject _ContentParent = null;
 
         //タブの数
-        [SerializeField]
         int _TabNum = 1;
-        int TabNum { get { return _TabNum; } set { _TabNum = value; Init(); } }
 
         //現在のタブ
         int _ActiveTabID = 0;
@@ -31,18 +29,26 @@ namespace Konan.UI
         //すべてのタブへの参照
         List<GameObject> _TabReferences = new List<GameObject>();
 
+        //現在のカテゴリ
+        [SerializeField]
+        MainWindowManager _MainWindow = null;
+
         void Awake()
         {
             //content parentに含まれているゲームオブジェクトを削除しておく
             var objects = _ContentParent.GetComponentsInChildren<Tab>();
             foreach (var obj in objects) Destroy(obj.gameObject);
+            
+        }
 
+        private void Start()
+        {
             Init();
         }
 
         private void Update()
         {
-            if(Input.GetButtonDown("R1") && ActiveTabID < TabNum-1)
+            if(Input.GetButtonDown("R1") && ActiveTabID < _TabNum-1)
             {
                 ActiveTabID++;
             }
@@ -53,8 +59,11 @@ namespace Konan.UI
         
         }
 
-        private void Init()
+        public void Init()
         {
+            //タブ数を取得
+            _TabNum = _MainWindow.CalcTabNum();
+
             //古いタブをすべて削除
             foreach (var obj in _TabReferences)
             {
@@ -85,6 +94,9 @@ namespace Konan.UI
                 var comp = _TabReferences[i].GetComponent<Tab>();
                 comp.IsEnable = (_ActiveTabID == i) ? true : false;
             }
+
+            _MainWindow.TabID = ActiveTabID;
+            _MainWindow.Init();
         }
     }
 }

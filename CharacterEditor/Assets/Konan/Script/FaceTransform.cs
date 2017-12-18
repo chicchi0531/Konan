@@ -15,11 +15,6 @@ namespace Konan
 
     public class FaceTransform : MonoBehaviour
     {
-
-        //年齢用スライダー
-        [SerializeField]
-        private Slider mSlider = null;
-
         //nのカーブ
         [SerializeField]
         private AnimationCurve mCurve = null;
@@ -110,10 +105,10 @@ namespace Konan
 
         }
 
-        public void OnChange()
+        public void OnChange(float value)
         {
             //スライダーの値を取得
-            var n = mCurve.Evaluate(mSlider.value)+1.0f;
+            var n = mCurve.Evaluate(value)+1.0f;
             var filterNum = mDMRenderer.Length + mSMFilter.Length;
 
             for (int i = 0; i < filterNum; i++)

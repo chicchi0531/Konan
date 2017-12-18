@@ -16,7 +16,8 @@ namespace Konan
         private Dictionary<string, int> BaseBoneList { get { return mBaseBoneList; } set { mBaseBoneList = value; } }
 
         //各パーツのオブジェクトリスト
-        private GameObject[] PartsObjects { get; set; }
+        private List<GameObject> _PartsObjects = new List<GameObject>();
+        public List<GameObject> PartsObjects { get { return _PartsObjects; } set { _PartsObjects = value; } }
 
         //各パーツと基礎ボーンを統合してモデルを作る
         public void Combine()
@@ -39,7 +40,7 @@ namespace Konan
             }
 
             //各パーツのメッシュをコンバインできる形に変換
-            for (int i = 0; i < PartsObjects.Length; i++)
+            for (int i = 0; i < PartsObjects.Count; i++)
             {
                 if (!PartsObjects[i]) continue;
 
